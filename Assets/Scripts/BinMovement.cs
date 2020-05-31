@@ -17,7 +17,6 @@ public class BinMovement : MonoBehaviour
     void FixedUpdate()
     {
         rigidbody.velocity = new Vector3(200f * Time.deltaTime, 0f, 0f);
-        //Debug.Log(rigidbody.velocity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

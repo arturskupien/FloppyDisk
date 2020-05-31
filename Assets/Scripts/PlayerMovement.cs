@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float jumpPower;
     public Rigidbody2D rigidbody;
     public TextMeshProUGUI textScore;
+    public TextMeshProUGUI textPlay;
+    public GameObject menu;
+    public Button buttonStart;
+    public Button buttonRetry;
+    Vector3 menuOldPos;
+    Vector3 buttonStartPos;
     int score;
 
     private void Start()
     {
         score = 0;
+        menuOldPos = menu.transform.position;
+        buttonStartPos = buttonStart.transform.position;
     }
 
     void Update()
@@ -30,17 +39,19 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Score"))
         {
             score += 10;
-            //Debug.Log("Added Score");
         }
         else if (collision.CompareTag("Obsticle"))
         {
-            //Debug.Log("Game Over");
-            Time.timeScale = 0;
+            GameOver();
         }
-        else if (collision)
-        {
+    }
 
-        }
+    void GameOver()
+    {
+        Time.timeScale = 0;
+        menu.transform.position = menuOldPos;
+        buttonStart.transform.position = new Vector3(-1000f,0f,0f);
+        buttonRetry.transform.position = buttonStartPos;
     }
 
 }
